@@ -1,0 +1,21 @@
+body {
+  background: #AAAAAA;
+}
+
+.board {
+  margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+  width: 480px;
+}
+
+.tile {
+  background-color: grey;
+  border-radius: 3px;
+  padding: 15px;
+  margin: 5px;
+}
+
+.selected {
+  background: lightgrey;
+}
