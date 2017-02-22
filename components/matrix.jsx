@@ -1,11 +1,20 @@
 import React from 'react';
-import T from 'timbre';
+import Sound from './sound';
+
+
 
 class Matrix extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.board = this.buildBoard();
     this.handleSelect = this.handleSelect.bind(this);
+
+    let col = 0;
+    setInterval(() => {
+      col += 1;
+      col %= 12;
+      this.playCol(col);
+    }, 1000);
   }
 
   buildBoard() {
@@ -19,10 +28,19 @@ class Matrix extends React.Component {
     return board;
   }
 
+  playCol(col) {
+    let freq = 1000;
+    this.board.forEach((row) => {
+      if (row[col].props.className === 'tile selected') {
+        new Sound(this.props.context, freq);
+      }
+      freq -= 100;
+    });
+  }
+
   handleSelect(e) {
     if (e.target.className === 'tile') {
       e.target.className += ' selected';
-      T("sin", {freq:880, mul:0.5}).play();
     } else if (e.target.className === 'tile selected') {
       e.target.className = 'tile';
     }
